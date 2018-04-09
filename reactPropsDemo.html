@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var Child = React.createClass({
+            clickEvent: function (data) {
+                this.props.parrent(data)
+            },
+            render(){
+                return (
+                    <div>
+                        <p>{this.props.title}</p>
+                        <button onClick={()=>this.clickEvent(1234)}>发送数据</button>
+                    </div>
+                )
+            }
+        });
+        var Parrent = React.createClass({
+            parrentEvent: function (data) {
+                alert(data);
+            },
+            render(){
+                return (
+                    <div>
+                        <h1>react</h1>
+                        <Child parrent={(data)=>this.parrentEvent(data)} title="我是父元素传递的值" />
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(<Parrent />,document.getElementById('root'));
+    </script>
+</body>
+</html>
